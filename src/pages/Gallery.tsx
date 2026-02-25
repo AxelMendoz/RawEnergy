@@ -5,7 +5,6 @@ export default function Gallery() {
   const [photos, setPhotos] = useState<any[]>([])
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
 
   const categories = ["FUTBOL", "BALONCESTO", "BOXEO", "ATLETISMO"]
 
@@ -14,16 +13,13 @@ export default function Gallery() {
   }, [])
 
   const fetchPhotos = async () => {
-    try {
-      setLoading(true)
-      const { data, error } = await supabase
-        .from("fotos")
-        .select("id, title, image_url")
-        .order("id", { ascending: false })
+    const { data, error } = await supabase
+      .from("fotos")
+      .select("id, title, image_url")
+      .order("id", { ascending: false })
 
-      if (!error) setPhotos(data || [])
-    } finally {
-      setLoading(false)
+    if (!error && data) {
+      setPhotos(data)
     }
   }
 
@@ -85,7 +81,13 @@ export default function Gallery() {
           className="lightbox"
           onClick={() => setSelectedImage(null)}
         >
-          <span className="close-lightbox">✕</span>
+          <span
+            className="close-lightbox"
+            onClick={() => setSelectedImage(null)}
+          >
+            ✕
+          </span>
+
           <img
             src={selectedImage}
             alt="preview"
