@@ -31,19 +31,26 @@ function App() {
     }
   }, [])
 
-  // RUTA ADMIN (única privada)
   if (route === "/admin") {
     if (!session) return <Login />
     return <Admin />
   }
 
-  // LANDING PÚBLICA
   return (
     <>
+      {/* HERO */}
       <section className="hero">
+        <div className="hero-overlay" />
         <div className="hero-content">
-          <h1>RAW ENERGY</h1>
-          <p>Capturando la intensidad real del deporte.</p>
+          <h1>
+            RAW <span>ENERGY</span>
+          </h1>
+
+          <p>
+            No capturamos deporte.
+            <br />
+            Capturamos el instante donde el límite se rompe.
+          </p>
 
           <button
             className="primary-btn"
@@ -53,25 +60,29 @@ function App() {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            VER EL IMPACTO
+            DESCUBRIR
           </button>
         </div>
       </section>
 
       <Gallery />
 
-      <section>
+      {/* MENTALIDAD */}
+      <section className="mentalidad">
         <h2>MENTALIDAD</h2>
-        <p style={{ maxWidth: "600px", marginTop: "20px", color: "#aaa" }}>
+        <p>
           Disciplina. Pasión. Intensidad.
-          No capturamos fotos.
-          Capturamos el momento donde el límite se rompe.
+          <br />
+          La energía no se explica.
+          <br />
+          Se siente.
         </p>
       </section>
 
+      {/* CTA */}
       <section className="cta">
-        <h2>¿ESTÁS LISTO PARA QUE TE VEAN?</h2>
-        <button>CONTACTAR</button>
+        <h2>EL MOMENTO ES AHORA</h2>
+        <button>RESERVA TU SESIÓN</button>
       </section>
     </>
   )
