@@ -15,7 +15,7 @@ function App() {
 
     window.addEventListener("popstate", handlePop)
 
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(({ data }: { data: any }) => {
       setSession(data.session)
     })
 
